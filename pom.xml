@@ -9,7 +9,7 @@
     <url></url>
     <description>jawampa is a library that provides client and server support for the Web Application Messaging Protocol (WAMP) on the JVM.</description>
   
-    <licenses>
+    <!-- licenses>
         <license>
             <name>Apache License, Version 2.0</name>
             <url>http://www.apache.org/licenses/LICENSE-2.0</url>
@@ -19,7 +19,6 @@
     <inceptionYear>2014</inceptionYear>
   
     <properties>
-        <!-- github server corresponds to entry in ~/.m2/settings.xml -->
         <github.global.server>github</github.global.server>
     </properties>
   
@@ -46,15 +45,15 @@
                 <artifactId>site-maven-plugin</artifactId>
                 <version>0.10</version>
                 <configuration>
-                    <message>Maven artifacts for ${project.name} ${project.version}</message> <!-- git commit message -->
-                    <noJekyll>true</noJekyll> <!-- disable webpage processing -->
-                    <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory> <!-- matches distribution management repository url above -->
-                    <branch>refs/heads/mvn-repo</branch> <!-- remote branch name -->
+                    <message>Maven artifacts for ${project.name} ${project.version}</message>
+                    <noJekyll>true</noJekyll>
+                    <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+                    <branch>refs/heads/mvn-repo</branch>
                     <includes>
                         <include>**/*</include>
                     </includes>
-                    <repositoryName>jawampa</repositoryName> <!-- github repo name -->
-                    <repositoryOwner>Matthias247</repositoryOwner> <!-- github username -->
+                    <repositoryName>jawampa</repositoryName>
+                    <repositoryOwner>Matthias247</repositoryOwner>
                 </configuration>
                 <executions>
                     <execution>
@@ -67,7 +66,21 @@
             </plugin>
         </plugins>
     </build>
-  
+     <scm>
+        <url>https://github.com/Matthias247/jawampa</url>
+        <connection>scm:git:https://github.com/Matthias247/jawampa.git</connection>
+        <developerConnection>scm:git:https://github.com/Matthias247/jawampa.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm-->
+    
+     <distributionManagement>
+	 <repository>
+      <id>guvnor-m2-repo</id>
+      <name>Guvnor M2 Repo</name>
+      <url>http://localhost:8080/jbpm-console/maven2/</url>
+    </repository>    
+	</distributionManagement>
+    
     <dependencies>
         <dependency>
             <groupId>io.reactivex</groupId>
@@ -85,11 +98,22 @@
             <version>2.4.2</version>
         </dependency>
     </dependencies>
-  
-    <scm>
-        <url>https://github.com/Matthias247/jawampa</url>
-        <connection>scm:git:https://github.com/Matthias247/jawampa.git</connection>
-        <developerConnection>scm:git:https://github.com/Matthias247/jawampa.git</developerConnection>
-        <tag>HEAD</tag>
-    </scm>
+  <repositories>
+    <repository>
+      <id>guvnor-m2-repo</id>
+      <name>Guvnor M2 Repo</name>
+      <url>http://localhost:8080/jbpm-console/maven2/</url>
+    </repository>
+  </repositories>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-maven-plugin</artifactId>
+        <version>6.1.0.Final</version>
+        <extensions>true</extensions>
+      </plugin>
+    </plugins>
+  </build>
+ 
 </project>
